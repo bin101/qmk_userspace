@@ -40,6 +40,7 @@
 #define FLOAT LCA(KC_F)
 #define TILES LCA(KC_D)
 #define FULLS LOPT(KC_F)
+#define BALAN LCA(KC_S)
 
 #define RSTAT LCAG(KC_R)
 #define LTAB  RCS(KC_TAB)
@@ -70,9 +71,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         STACK,   LJOIN,   DJOIN,   UJOIN,   RJOIN,   TILES,                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-        FLOAT,   LFOCU,   DFOCU,   UFOCU,   RFOCU,   FULLS,                             XXXXXXX, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, XXXXXXX,
+        FLOAT,   LFOCU,   DFOCU,   UFOCU,   RFOCU,   FULLS,                             KC_LEFT, KC_DOWN,  KC_UP,  KC_RIGHT, XXXXXXX, XXXXXXX,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-       _______, XXXXXXX, LASTDE,  LTAB,    RTAB,    AUTOF,  XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       _______, XXXXXXX, LASTDE,  LTAB,    RTAB,    AUTOF,  XXXXXXX,           XXXXXXX,  BALAN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                       _______, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, _______
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
