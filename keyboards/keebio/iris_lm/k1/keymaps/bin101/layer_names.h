@@ -5,8 +5,8 @@
 
 enum custom_layers {
      _BASE,
-     _SYMBOLS,
      _NAVI,
+     _SYMBOLS,
      _GAMEING,
      _ADJUST
 };
