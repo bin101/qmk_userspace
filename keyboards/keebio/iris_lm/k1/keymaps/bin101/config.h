@@ -3,7 +3,7 @@
 
 #pragma once
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
 #define ONESHOT_TIMEOUT 5000
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
