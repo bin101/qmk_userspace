@@ -14,7 +14,7 @@
 // lightning
 #define SPLIT_LAYER_STATE_ENABLE
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 120
-#define RGB_MATRIX_DEFAULT_VAL 60
+#define RGB_MATRIX_DEFAULT_VAL 30
 
 // space saves
 #define LAYER_STATE_8BIT // limits to max 8 layers
