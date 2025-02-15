@@ -229,11 +229,11 @@ bool process_detected_host_os_user(os_variant_t detected_os) {
     switch (detected_os) {
         case OS_WINDOWS:
         case OS_LINUX:
-            layer_on(_WIN);
+            layer_move(_WIN);
             mac_mode = false;
             break;
         default:
-            layer_on(_MAC);
+            layer_move(_MAC);
             mac_mode = true;
             break;
     }
