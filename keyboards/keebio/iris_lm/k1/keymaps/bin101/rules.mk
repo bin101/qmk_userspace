@@ -4,5 +4,6 @@ LTO_ENABLE = yes
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
+OS_DETECTION_ENABLE = yes
 
 SRC += lightning.c

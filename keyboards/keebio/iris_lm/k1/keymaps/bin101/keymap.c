@@ -8,8 +8,7 @@
 
 
 #define CTL_Z MT(MOD_LCTL, KC_Z)
-#define CTL_SL MT(MOD_RCTL, KC_SLSH)
-#define BS_GUI MT(MOD_LGUI, KC_BSPC)
+#define GUI_Z MT(MOD_LGUI, KC_Z)
 #define FN_A LT(0, KC_A)
 #define FN_O LT(0, KC_O)
 #define FN_U LT(0, KC_U)
@@ -48,10 +47,17 @@
 
 #define AUTOF LSG(KC_L)
 
+enum custom_keycodes {
+    OS_LOCK = SAFE_RANGE,
+    OS_SLEEP,
+ };
+
+bool mac_mode;
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [_BASE] = LAYOUT(
+    [_MAC] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
         KC_EQUAL, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINUS,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -59,9 +65,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         KC_DELETE, FN_A,   FN_S,    KC_D,    KC_F,   FN_G,                                FN_H,  KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-        KC_LSFT,  CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,   KC_BSPC,          KC_ESC,  KC_N,    KC_M,    KC_COMM, KC_DOT, CTL_SL, KC_RSFT,
+        KC_LSFT,  CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,   KC_BSPC,          KC_ESC,  KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                       TL_LOWR, KC_SPACE, KC_LGUI,                  KC_LALT, KC_ENTER, TL_UPPR
+                                  // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+    ),
+
+    [_WIN] = LAYOUT(
+    //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+        KC_EQUAL, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINUS,
+    //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+        KC_TAB,  KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    FN_U,   KC_I,    FN_O,    KC_P,  KC_BSLS,
+    //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+        KC_DELETE, FN_A,   FN_S,    KC_D,    KC_F,   FN_G,                                FN_H,  KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+        KC_LSFT,  GUI_Z,   KC_X,    KC_C,    KC_V,    KC_B,   KC_BSPC,          KC_ESC,  KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+    //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                      TL_LOWR, KC_SPACE, KC_LCTL,                  KC_LALT, KC_ENTER, TL_UPPR
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
     ),
 
@@ -75,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
        _______, XXXXXXX, LASTDE,  LTAB,    RTAB,    AUTOF,  XXXXXXX,           XXXXXXX,  BALAN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                      _______, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, _______
+                                      _______, XXXXXXX, _______,                   _______, XXXXXXX, _______
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
     ),
 
@@ -101,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    TG(3),            _______,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSPC,
+        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    TG(4),            _______,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSPC,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                        KC_LGUI, KC_SPACE, KC_LALT,                  QK_GESC,  KC_ENTER, KC_RALT
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -111,9 +131,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, RM_VALD, RM_TOGG, RM_VALU, XXXXXXX, QK_BOOT,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, KC_F19,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, OS_SLEEP,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(3)  ,                            XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(4)  ,                            OS_LOCK, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
         EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, EE_CLR,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -179,6 +199,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(US_EURO); // long press sends '€'
             }
             return false;
+        case OS_LOCK:
+            if (mac_mode) {
+                if (record->event.pressed) {
+                    tap_code16(C(G(KC_Q)));
+                }
+            } else {
+                if (record->event.pressed) {
+                    tap_code16(G(KC_L));
+                }
+            }
+            return false;
+        case OS_SLEEP:
+            if (mac_mode) {
+                if (record->event.pressed) {
+                    tap_code16(S(C(KC_MEDIA_EJECT)));
+                }
+            } else {
+                if (record->event.pressed) {
+                    tap_code16(KC_SYSTEM_SLEEP);
+                }
+            }
+            return false;
     }
     return true;
+}
+
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    switch (detected_os) {
+        case OS_WINDOWS:
+        case OS_LINUX:
+            layer_on(_WIN);
+            mac_mode = false;
+            break;
+        default:
+            layer_on(_MAC);
+            mac_mode = true;
+            break;
+    }
+    return false;
 }
