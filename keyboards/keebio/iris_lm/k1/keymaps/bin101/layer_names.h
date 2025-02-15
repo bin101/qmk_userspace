@@ -4,7 +4,8 @@
 #pragma once
 
 enum custom_layers {
-     _BASE,
+     _MAC,
+     _WIN,
      _NAVI,
      _SYMBOLS,
      _GAMEING,
