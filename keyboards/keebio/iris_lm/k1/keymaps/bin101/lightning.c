@@ -172,8 +172,3 @@ void set_layer_color(int layer) {
         free(ledmap_value);
     }
 }
-
-bool rgb_matrix_indicators_user(void) {
-    set_layer_color(get_highest_layer(layer_state));
-    return false;
-}

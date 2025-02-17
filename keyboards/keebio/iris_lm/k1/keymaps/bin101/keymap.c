@@ -2,9 +2,12 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+#include "action.h"
+#include "modifiers.h"
 #include "keymap_us_international.h"
 #include "layer_names.h"
 #include "lightning.h"
+#include "os_detection.h"
 
 
 #define CTL_Z MT(MOD_LCTL, KC_Z)
@@ -147,6 +150,26 @@ void keyboard_post_init_user(void) {
     rgb_matrix_enable();
 }
 
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    switch (detected_os) {
+        case OS_WINDOWS:
+        case OS_LINUX:
+            layer_move(_WIN);
+            mac_mode = false;
+            break;
+        default:
+            layer_move(_MAC);
+            mac_mode = true;
+            break;
+    }
+    return false;
+}
+
+bool rgb_matrix_indicators_user(void) {
+    set_layer_color(get_highest_layer(layer_state));
+    return false;
+}
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -226,19 +249,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
     }
     return true;
-}
-
-bool process_detected_host_os_user(os_variant_t detected_os) {
-    switch (detected_os) {
-        case OS_WINDOWS:
-        case OS_LINUX:
-            layer_move(_WIN);
-            mac_mode = false;
-            break;
-        default:
-            layer_move(_MAC);
-            mac_mode = true;
-            break;
-    }
-    return false;
 }
