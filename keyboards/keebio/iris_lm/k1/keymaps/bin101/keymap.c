@@ -213,7 +213,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_SLEEP:
             if (mac_mode) {
                 if (record->event.pressed) {
-                    tap_code16(S(C(KC_MEDIA_EJECT)));
+                    register_mods(mod_config(MOD_LSFT | MOD_LCTL));
+                    register_code(KC_MEDIA_EJECT);
+                } else {
+                    clear_keyboard();
                 }
             } else {
                 if (record->event.pressed) {
