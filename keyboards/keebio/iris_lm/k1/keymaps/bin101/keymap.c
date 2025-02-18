@@ -39,7 +39,7 @@
 #define RFOCU LOPT(KC_L)
 
 #define STACK LCA(KC_A)
-#define FLOAT LCA(KC_F)
+#define FLOAT LOPT(KC_SPACE)
 #define TILES LCA(KC_D)
 #define FULLS LOPT(KC_F)
 #define BALAN LCA(KC_S)
