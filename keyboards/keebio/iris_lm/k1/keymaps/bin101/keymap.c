@@ -48,11 +48,10 @@
 #define LTAB  RCS(KC_TAB)
 #define RTAB  LCTL(KC_TAB)
 
-#define AUTOF LSG(KC_L)
-
 enum custom_keycodes {
     OS_LOCK = SAFE_RANGE,
     OS_SLEEP,
+    OS_FILL,
  };
 
 bool mac_mode;
@@ -96,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         FLOAT,   LFOCU,   DFOCU,   UFOCU,   RFOCU,   FULLS,                             KC_LEFT, KC_DOWN,  KC_UP,  KC_RIGHT, XXXXXXX, XXXXXXX,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-       _______, XXXXXXX, LASTDE,  LTAB,    RTAB,    AUTOF,  XXXXXXX,           XXXXXXX,  BALAN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       _______, XXXXXXX, LASTDE,  LTAB,    RTAB,    OS_FILL,  XXXXXXX,           XXXXXXX,  BALAN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                       _______, XXXXXXX, _______,                   _______, XXXXXXX, _______
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -244,6 +243,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 if (record->event.pressed) {
                     tap_code16(KC_SYSTEM_SLEEP);
+                }
+            }
+            return false;
+        case OS_FILL:
+            if (mac_mode) {
+                if (record->event.pressed) {
+                    tap_code16(G(S(KC_L)));
+                }
+            } else {
+                if (record->event.pressed) {
+                    tap_code16(C(S(KC_L)));
                 }
             }
             return false;
