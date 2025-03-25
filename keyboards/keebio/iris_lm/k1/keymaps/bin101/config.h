@@ -19,6 +19,9 @@
 // space saves
 #define LAYER_STATE_8BIT // limits to max 8 layers
 
+// os detection
+#define OS_DETECTION_KEYBOARD_RESET
+
 // effects
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
 #undef ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
@@ -66,3 +69,6 @@
 #undef ENABLE_RGB_MATRIX_MULTISPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_SPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+
+// debugging
+//#define OS_DETECTION_DEBUG_ENABLE

@@ -52,6 +52,8 @@ enum custom_keycodes {
     OS_LOCK = SAFE_RANGE,
     OS_SLEEP,
     OS_FILL,
+    STORE_SETUPS,
+    PRINT_SETUPS,
  };
 
 bool mac_mode;
@@ -133,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, RM_VALD, RM_TOGG, RM_VALU, XXXXXXX, QK_BOOT,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, OS_SLEEP,
+        XXXXXXX, STORE_SETUPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, OS_SLEEP,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(4)  ,                            OS_LOCK, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+        XXXXXXX, PRINT_SETUPS, XXXXXXX, XXXXXXX, XXXXXXX, TG(4)  ,                            OS_LOCK, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
         EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, EE_CLR,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -257,6 +259,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
+#       ifdef OS_DETECTION_DEBUG_ENABLE
+        case STORE_SETUPS:
+            if (record->event.pressed) {
+                store_setups_in_eeprom();
+            }
+            return false;
+        case PRINT_SETUPS:
+            if (record->event.pressed) {
+                print_stored_setups();
+            }
+            return false;
+#       endif
     }
     return true;
 }

@@ -6,4 +6,7 @@ COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
 OS_DETECTION_ENABLE = yes
 
+# debugging
+CONSOLE_ENABLE = no
+
 SRC += lightning.c
