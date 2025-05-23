@@ -1,6 +1,8 @@
 // Copyright 2025 Jens van Almsick (@bin101)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+#include "keycodes.h"
+#include "quantum.h"
 #include QMK_KEYBOARD_H
 #include "action.h"
 #include "modifiers.h"
@@ -237,10 +239,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_SLEEP:
             if (mac_mode) {
                 if (record->event.pressed) {
-                    register_mods(mod_config(MOD_LSFT | MOD_LCTL));
-                    register_code(KC_MEDIA_EJECT);
-                } else {
-                    clear_keyboard();
+                    tap_code16(A(G(KC_MEDIA_EJECT)));
                 }
             } else {
                 if (record->event.pressed) {
