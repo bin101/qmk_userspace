@@ -56,9 +56,11 @@ enum custom_keycodes {
     OS_FILL,
     STORE_SETUPS,
     PRINT_SETUPS,
+    OS_WIN,
+    OS_MAC
  };
 
-bool mac_mode;
+bool mac_mode = true;
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -135,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_ADJUST] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, RM_VALD, RM_TOGG, RM_VALU, XXXXXXX, QK_BOOT,
+        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OS_MAC,                            OS_WIN, RM_VALD, RM_TOGG, RM_VALU, XXXXXXX, QK_BOOT,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         XXXXXXX, STORE_SETUPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, OS_SLEEP,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -153,20 +155,20 @@ void keyboard_post_init_user(void) {
     rgb_matrix_enable();
 }
 
-bool process_detected_host_os_user(os_variant_t detected_os) {
-    switch (detected_os) {
-        case OS_WINDOWS:
-        case OS_LINUX:
-            layer_move(_WIN);
-            mac_mode = false;
-            break;
-        default:
-            layer_move(_MAC);
-            mac_mode = true;
-            break;
-    }
-    return false;
-}
+// bool process_detected_host_os_user(os_variant_t detected_os) {
+//     switch (detected_os) {
+//         case OS_WINDOWS:
+//         case OS_LINUX:
+//             layer_move(_WIN);
+//             mac_mode = false;
+//             break;
+//         default:
+//             layer_move(_MAC);
+//             mac_mode = true;
+//             break;
+//     }
+//     return false;
+// }
 
 bool rgb_matrix_indicators_user(void) {
     set_layer_color(get_highest_layer(layer_state));
@@ -258,6 +260,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
+        case OS_WIN:
+            layer_off(_MAC);
+            layer_on(_WIN);
+            mac_mode = false;
+            return false;
+        case OS_MAC:
+            layer_off(_WIN);
+            layer_on(_MAC);
+            mac_mode = true;
+            return false;
+
 #       ifdef OS_DETECTION_DEBUG_ENABLE
         case STORE_SETUPS:
             if (record->event.pressed) {
