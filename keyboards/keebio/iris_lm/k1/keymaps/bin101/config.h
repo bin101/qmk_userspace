@@ -6,8 +6,8 @@
 #define TAPPING_TERM 250
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
-#define TRI_LAYER_LOWER_LAYER 2
-#define TRI_LAYER_UPPER_LAYER 3
+#define TRI_LAYER_LOWER_LAYER 3
+#define TRI_LAYER_UPPER_LAYER 4
 #define TRI_LAYER_ADJUST_LAYER 5
 
 // lightning
@@ -20,7 +20,9 @@
 #define LAYER_STATE_8BIT // limits to max 8 layers
 
 // os detection
-#define OS_DETECTION_KEYBOARD_RESET
+// #define OS_DETECTION_KEYBOARD_RESET
+// #define OS_DETECTION_DEBOUNCE 750
+// #define OS_DETECTION_SINGLE_REPORT
 
 // effects
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
