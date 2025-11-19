@@ -156,20 +156,20 @@ void keyboard_post_init_user(void) {
     rgb_matrix_enable();
 }
 
-// bool process_detected_host_os_user(os_variant_t detected_os) {
-//     switch (detected_os) {
-//         case OS_WINDOWS:
-//         case OS_LINUX:
-//             layer_move(_WIN);
-//             mac_mode = false;
-//             break;
-//         default:
-//             layer_move(_MAC);
-//             mac_mode = true;
-//             break;
-//     }
-//     return false;
-// }
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    switch (detected_os) {
+        case OS_WINDOWS:
+        case OS_LINUX:
+            layer_move(_WIN);
+            mac_mode = false;
+            break;
+        default:
+            layer_move(_MAC);
+            mac_mode = true;
+            break;
+    }
+    return false;
+}
 
 bool rgb_matrix_indicators_user(void) {
     set_layer_color(get_highest_layer(layer_state));
