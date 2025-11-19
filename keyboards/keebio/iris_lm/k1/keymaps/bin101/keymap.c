@@ -14,6 +14,7 @@
 
 #define CTL_Z MT(MOD_LCTL, KC_Z)
 #define GUI_Z MT(MOD_LGUI, KC_Z)
+#define SPC_A MT(MOD_LALT, KC_SPACE)
 #define FN_A LT(0, KC_A)
 #define FN_O LT(0, KC_O)
 #define FN_U LT(0, KC_U)
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
         KC_LSFT,  CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,   KC_BSPC,          KC_ESC,  KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                      TL_LOWR, KC_SPACE, KC_LGUI,                  KC_LALT, KC_ENTER, TL_UPPR
+                                      TL_LOWR,  SPC_A,  KC_LGUI,                   KC_LALT, KC_ENTER, TL_UPPR
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
     ),
 
@@ -89,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
         KC_LSFT,  GUI_Z,   KC_X,    KC_C,    KC_V,    KC_B,   KC_BSPC,          KC_ESC,  KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                      TL_LOWR, KC_SPACE, KC_LCTL,                  KC_LALT, KC_ENTER, TL_UPPR
+                                      TL_LOWR,  SPC_A,  KC_LCTL,                  KC_LALT, KC_ENTER, TL_UPPR
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
     ),
 
