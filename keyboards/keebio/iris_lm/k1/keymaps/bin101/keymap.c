@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
     ),
 
-    [_GAMEING] = LAYOUT(
+    [_GAMING] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
         QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINUS,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -240,13 +240,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case OS_SLEEP:
-            if (mac_mode) {
-                if (record->event.pressed) {
-                    tap_code16(A(G(KC_MEDIA_EJECT)));
-                }
-            } else {
-                if (record->event.pressed) {
-                    tap_code16(KC_SYSTEM_SLEEP);
+            if (record->event.pressed) {
+                if (mac_mode) {
+                    register_code(KC_LGUI);
+                    register_code(KC_LALT);
+                    
+                    register_code(KC_MEDIA_EJECT); 
+                    wait_ms(400);
+                    unregister_code(KC_MEDIA_EJECT);
+                    
+                    unregister_code(KC_LALT);
+                    unregister_code(KC_LGUI);
+                } else {
+                    // Windows Standard bleibt einfach
+                    tap_code(KC_SYSTEM_SLEEP);
                 }
             }
             return false;
