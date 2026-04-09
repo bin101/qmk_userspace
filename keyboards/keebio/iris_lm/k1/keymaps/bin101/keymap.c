@@ -190,7 +190,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->tap.count && record->event.pressed) {
                 tap_code16(KC_O); // short press sends 'o'
             } else if (record->event.pressed) {
-                tap_code16(US_ODIA); // long press sends 'ö'¡¡¡¡¡
+                tap_code16(US_ODIA); // long press sends 'ö'
             }
             return false;
         case FN_U:
