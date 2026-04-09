@@ -6,7 +6,7 @@
 enum custom_layers {
      _MAC,
      _WIN,
-     _GAMEING,
+     _GAMING,
      _NAVI,
      _SYMBOLS,
      _ADJUST
