@@ -50,6 +50,7 @@
 #define RSTAT LCAG(KC_R)
 #define LTAB  RCS(KC_TAB)
 #define RTAB  LCTL(KC_TAB)
+#define WHIS  LSG(KC_SPACE)
 
 enum custom_keycodes {
     OS_LOCK = SAFE_RANGE,
@@ -116,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         FLOAT,   LFOCU,   DFOCU,   UFOCU,   RFOCU,   FULLS,                             KC_LEFT, KC_DOWN,  KC_UP,  KC_RIGHT, XXXXXXX, XXXXXXX,
     //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-       _______, XXXXXXX, LASTDE,  LTAB,    RTAB,    OS_FILL,  _______,          _______,  BALAN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, WHIS,    LASTDE,  LTAB,    RTAB,    OS_FILL,  _______,          _______,  BALAN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                       _______, XXXXXXX, _______,                   _______, XXXXXXX, _______
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -158,17 +159,22 @@ void keyboard_post_init_user(void) {
 
 bool process_detected_host_os_user(os_variant_t detected_os) {
     switch (detected_os) {
+        case OS_MACOS:
+        case OS_IOS:
+            layer_move(_MAC);
+            mac_mode = true;
+            break;
         case OS_WINDOWS:
         case OS_LINUX:
             layer_move(_WIN);
             mac_mode = false;
             break;
+        case OS_UNSURE:
         default:
-            layer_move(_MAC);
-            mac_mode = true;
+            // Bei Unsicherheit aktuellen Modus beibehalten – kein Wechsel
             break;
     }
-    return false;
+    return true;
 }
 
 bool rgb_matrix_indicators_user(void) {
@@ -269,13 +275,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case OS_WIN:
-            layer_off(_MAC);
-            layer_on(_WIN);
+            layer_move(_WIN);
             mac_mode = false;
             return false;
         case OS_MAC:
-            layer_off(_WIN);
-            layer_on(_MAC);
+            layer_move(_MAC);
             mac_mode = true;
             return false;
 

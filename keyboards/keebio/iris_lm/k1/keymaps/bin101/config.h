@@ -20,8 +20,8 @@
 #define LAYER_STATE_8BIT // limits to max 8 layers
 
 // os detection
-#define OS_DETECTION_KEYBOARD_RESET
-// #define OS_DETECTION_DEBOUNCE 750
+// #define OS_DETECTION_KEYBOARD_RESET  // deaktiviert: macOS multi-stage enumeration triggert sonst soft_reset_keyboard()
+#define OS_DETECTION_DEBOUNCE 750
 // #define OS_DETECTION_SINGLE_REPORT
 
 // effects
