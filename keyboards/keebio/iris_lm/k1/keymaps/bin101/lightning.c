@@ -6,6 +6,7 @@
 extern rgb_config_t rgb_matrix_config;
 
 #define ____    HSV_BLACK
+#define BLAK    HSV_BLACK
 #define AZUR    HSV_AZURE
 #define BLUE    HSV_BLUE
 #define CHAT    HSV_CHARTREUSE
